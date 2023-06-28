@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: "dev"
+  main:
+    banner-mode: "off"
+  resources:
+    static-locations: 
+    - classpath:/static/
+    - classpath:/samples/  

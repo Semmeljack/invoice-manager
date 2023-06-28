@@ -1,0 +1,64 @@
+<div *ngIf="emisor">
+  <p class="font-weight-bold">Información del Emisor</p>
+  <div class="row">
+    <div class="col-sm-2">
+      <label for="rfcEmisor" class="label">RFC Emisor</label>
+      <input
+        id="rfcEmisor"
+        class="form-control"
+        type="text"
+        [(ngModel)]="emisor.rfc"
+        fullWidth
+        placeholder="Rfc"
+        disabled
+      />
+    </div>
+    <div class="col-sm-8">
+      <label for="nombreEmisor" class="label">Nombre Emisor</label>
+      <input
+        id="nombreEmisor"
+        type="text"
+        [(ngModel)]="emisor.nombre"
+        class="form-control"
+        fullWidth
+        placeholder="Nombre"
+        [disabled]="!allowEdit"
+        (ngModelChange)="updateRazonSocial($event)"
+      />
+    </div>
+    <div class="col-sm-2">
+      <label for="regimenEmisor" class="label">Regimen Emisor</label>
+      <select
+                id="regimenEmisor"
+                style="display: block"
+                class="form-control text-uppercase"
+                [disabled]="!allowEdit"
+                [ngModel]="emisor.regimenFiscal"
+                (change)="updateRegimenFiscal($event.target.value)"
+            >
+                <option value="*">SELECCIONAR</option>
+                <option class="text-uppercase"
+                    *ngFor="let regimen of regimenes"
+                    [(value)]="regimen.clave"
+                >
+                {{ regimen.clave }} - {{ regimen.descripcion }}
+                </option>
+            </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <label for="direccioneEmisor" class="label">Direccion Emisor</label>
+      <textarea
+        id="direccioneEmisor"
+        type="text"
+        style="margin-top: 0px; margin-bottom: 0px; height: 38px"
+        [(ngModel)]="direccion"
+        placeholder="Direccion Emisor"
+        (ngModelChange)="addressChange($event)"
+        class="form-control"
+        [disabled]="!allowEdit"
+      ></textarea>
+    </div>
+  </div>
+</div>

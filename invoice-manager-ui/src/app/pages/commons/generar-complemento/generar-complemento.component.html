@@ -1,0 +1,100 @@
+<div>
+    <div *ngIf="factura && factura.cfdi && factura.saldoPendiente > 0.1">
+        <p
+            class="font-weight-bold"
+            *ngIf="
+                factura.cfdi.total > paymentSum &&
+                factura.metodoPago == 'PPD' &&
+                factura.folio !== undefined
+            "
+        >
+            Cargar Complementos
+        </p>
+        <div
+            class="row slide_1"
+            *ngIf="
+                factura.cfdi.total > paymentSum && factura.metodoPago == 'PPD'
+            "
+        >
+            <div class="col-2">
+                <label for="inputPayCoin" class="label">Moneda</label>
+                <select
+                    id="inputPayCoin"
+                    style="display: block"
+                    class="form-control"
+                    [(ngModel)]="newPayment.moneda"
+                >
+                    <option value="MXN">Peso MX</option>
+                </select>
+            </div>
+            <div class="col-3">
+                <label for="inputPayType" class="label">Forma de Pago</label>
+                <select
+                    selected="1"
+                    id="inputPayType"
+                    style="display: block"
+                    class="form-control"
+                    [(ngModel)]="newPayment.formaPago"
+                >
+                    <option value="*">Seleccionar</option>
+                    <option
+                        *ngFor="let payType of complementPayTypeCat"
+                        [value]="payType.id"
+                    >
+                        {{ payType.nombre }}
+                    </option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="payAmmount" class="label">Monto Complemento</label>
+                <input
+                    id="payAmmount"
+                    class="form-control"
+                    fullWidth
+                    type="number"
+                    min="0"
+                    placeholder="Monto"
+                    [(ngModel)]="newPayment.monto"
+                />
+            </div>
+            <div class="col-2">
+                <label for="payAmmount" class="label">Fecha de pago</label>
+                <div class="input-group">
+                    <input
+                        nbInput
+                        placeholder="Fecha de pago"
+                        [nbDatepicker]="formpicker"
+                        [(ngModel)]="newPayment.fechaPago"
+                        style="display: block; width: 100%"
+                    />
+                    <nb-datepicker #formpicker></nb-datepicker>
+                </div>
+            </div>
+            <div class="col-3">
+                <button
+                    style="width: 100%; margin-top: 28px"
+                    nbButton
+                    status="primary"
+                    size="medium"
+                    (click)="generateComplement()"
+                    [nbSpinner]="loading"
+                    [disabled]="loading"
+                    nbSpinnerStatus="primary"
+                    nbSpinnerSize="small"
+                    nbSpinnerMessage=""
+                >
+                    Generar Complemento
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div
+        class="alert alert-warning"
+        *ngIf="payErrorMessages.length > 0"
+        role="alert"
+    >
+        <p *ngFor="let message of payErrorMessages">{{ message }}</p>
+    </div>
+</div>

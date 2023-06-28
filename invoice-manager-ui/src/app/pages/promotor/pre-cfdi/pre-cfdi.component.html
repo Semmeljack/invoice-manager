@@ -1,0 +1,114 @@
+<div class="row slide_2">
+    <div class="col-md-12">
+        <nb-card class="col-md-12 col-lg-12" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="medium">
+            <nb-card-header>
+                <div class="clearfix" *ngIf="factura">
+                    <p class="h6 float-left" *ngIf="folio !== '*'">
+                     PREFOLIO : {{ factura?.preFolio }} - FOLIO : {{ factura?.folio }}
+                    </p>
+                      <p *ngIf="folio == '*'" class="h6 float-left">Solicitud Pre Cfdi</p>
+                      <nt-invoice-status
+                        class="float-right"
+                        *ngIf="folio !== '*'"
+                        [status]="factura?.statusFactura"
+                    ></nt-invoice-status>
+                    
+                    <button nbButton status="success" size="small" (click)="revalidateInvoice()" [nbSpinner]="loading"
+                        class="float-right ml-1 mr-1" [disabled]="loading" nbSpinnerStatus="success"
+                        *ngIf="factura?.statusFactura == '6' || factura?.statusFactura == '5'" nbSpinnerSize="small"
+                        nbSpinnerMessage="">
+                        Revalidar Factura<i class="fa fa-check" style="margin-left: 10px"></i>
+                    </button>
+                </div>
+            </nb-card-header>
+            <nb-card-body>
+                <div *ngIf="folio === '*' && !factura.folio">
+                    <p class="font-weight-bold">
+                        Información Emisor y Receptor
+                    </p>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="inputGiro" class="label">Giro Empresa</label>
+                                <select id="inputGiro" fullWidth class="form-control" (change)="
+                                        onGiroSelection($event.target.value)
+                                    " style="display: block" [(ngModel)]="formInfo.giro">
+                                    <option value="*">Seleccionar</option>
+                                    <option *ngFor="let giro of girosCat" [(value)]="giro.id">
+                                        {{ giro.nombre }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="inputEmpresa" class="label">Empresa</label>
+                            <select id="inputEmpresa" class="form-control" (change)="
+                                    onCompanySelected($event.target.value)
+                                " [(ngModel)]="formInfo.empresa" style="display: block" fullWidth
+                                [disabled]="companiesCat.length === 0">
+                                <option value="*">Seleccionar</option>
+                                <option *ngFor="let company of companiesCat" [(value)]="company.id">
+                                    {{ company.rfc }}-{{ company.razonSocial }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputCliente" class="label">Nombre o razon social del cliente</label>
+                            <ng-autocomplete [data]="clientsCat" [searchKeyword]="'razonSocial'"
+                                placeholder="Escribe el nombre o razon social del cliente"
+                                (selected)="onClientSelected($event)"
+                                [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+                            </ng-autocomplete>
+
+                            <div>
+                                <span></span>
+                            </div>
+
+                            <ng-template #itemTemplate let-item>
+                                <div class="item">
+                                    <span [innerHTML]="item.razonSocial"></span>
+                                </div>
+                            </ng-template>
+
+                            <ng-template #notFoundTemplate let-notFound>
+                                <span>No hay coincidencias</span>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+
+                <nt-cfdi [allowEdit]="
+            factura?.tipoDocumento !== 'Complemento' &&
+            (factura?.folio === undefined ||
+              factura?.statusFactura == 1 ||
+              factura?.statusFactura == 2 )">
+                </nt-cfdi>
+
+                <div class="row" *ngIf="
+                        factura?.cfdi &&
+                        factura?.statusDetail &&
+                        factura?.statusDetail.length > 0
+                    ">
+                    <div class="col-sm-12">
+                        <label for="inputdesc" class="label">Descripción Rechazo CFDI</label>
+                        <div class="alert alert-danger" role="alert">
+                            {{ factura.statusDetail }}
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row" *ngIf="!factura?.folio && factura?.cfdi.total > 0">
+                    <button nbButton status="success" size="medium" (click)="solicitarCfdi()" [nbSpinner]="loading"
+                        [disabled]="loading" nbSpinnerStatus="success" nbSpinnerSize="small" nbSpinnerMessage="">
+                        SOLICITAR CFDI
+                    </button>
+                    <!--button type="button" class="btn btn-info" (click)="limpiarForma()">LIMPIAR</button-->
+                </div>
+                <br />
+                <nt-pago-factura *ngIf="factura?.folio != undefined && factura?.tipoDocumento === 'Factura'"></nt-pago-factura>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

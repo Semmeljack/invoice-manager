@@ -1,0 +1,101 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card">
+      <nb-card-header class="puff_center">Usuarios</nb-card-header>
+      <nb-card-body>
+        <div class="row slide_1">
+          <div class="col-md-2">
+            <label for="inputCorreo" class="label">Correo Usuario</label>
+            <input type="text" class="form-control" [(ngModel)]="filterParams.email"
+              [disabled]="filterParams.alias.length > 0" nbInput fullWidth id="inputCorreo"
+              placeholder="email usuario">
+          </div>
+          <div class="col-md-3">
+            <label for="inputAlias" class="label">Alias usuario</label>
+            <input type="text" class="form-control" [(ngModel)]="filterParams.alias"
+              [disabled]="filterParams.email.length > 0" nbInput fullWidth id="inputAlias" placeholder="Alias usuario">
+          </div>
+          <div class="col-md-5">
+            <label for="inputActivo" class="label">Estado cliente</label>
+            <div class="row form-inline">
+              <select id="inputActivo" class="form-control" [(ngModel)]="filterParams.status" style="display:block;"
+                fullWidth>
+                <option value="*">TODOS</option>
+                <option value="1">ACTIVO</option>
+                <option value="0">INACTIVO</option>
+              </select>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+              <button class="btn btn-primary" (click)="updateDataTable(0,10)">BUSCAR</button>     
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+              <button class="btn btn-primary" (click)="redirectToUser('*')">NUEVO USUARIO</button>
+             
+            </div>
+          </div>
+        </div>
+        <br>
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header class="puff_center">Resultados</nb-card-header>
+      <nb-card-body>
+        
+        <div *ngIf="page.empty == true" class="alert alert-primary" role="alert">
+          No se encontraron resultados
+        </div>
+        <div class="clearfix puff_center">
+          <strong>Resultados</strong>
+          <!--button type="button" (click)="downloadHandler()" class="btn btn-success float-right">Descarga</button-->
+
+          <nb-select *ngIf="page.last==false || page.first==true" [selected]="pageSize"
+            (selectedChange)="onChangePageSize($event)" id="inputPageSize" class="float-right">
+            <nb-option value="10">10</nb-option>
+            <nb-option *ngIf="page.number<(page.totalElements/20)" value="20">20</nb-option>
+            <nb-option *ngIf="page.number<(page.totalElements/50)" value="50">50</nb-option>
+          </nb-select>
+        </div>
+        <div class="table-responsive slide_1" *ngIf="page.empty == false">
+
+          <table class="table table-sm">
+            <thead class="thead-dark">
+              <tr>
+                <th class="text-center">Editar</th>
+                <th class="text-center">Correo</th>
+                <th class="text-center">Alias</th>
+                <th class="text-center">Activo</th>
+                <th class="text-center">Creacion</th>
+                <th class="text-center">Actualización</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fila of page.content">
+                <td scope="row" ><button  class="btn btn-primary" (click)="Editar(fila.id)"><i class="fa fa-edit"></i></button></td>
+                <td scope="row">{{fila.email}}</td>
+                <td scope="row">{{fila.alias}}</td>
+                <td scope="row">{{fila.activo ? 'SI' : 'NO'}}</td>
+                <td scope="row">{{fila.fechaCreacion}}</td>
+                <td scope="row">{{fila.fechaActualizacion}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <ul class="pagination" *ngIf="page.totalElements > 1">
+            <li class="page-item" *ngIf="page.first==false"><button class="btn page-link"
+                (click)="updateDataTable(0,page.size)"><i class="nb-arrow-left"></i></button></li>
+            <li class="page-item" *ngIf="page.first==false"><button class="btn page-link"
+                (click)="updateDataTable(page.number-1,page.size)">{{page.number}}</button></li>
+            <li class="page-item active"><a class="page-link"><strong>{{page.number+1}}</strong></a></li>
+            <li class="page-item" *ngIf="page.last==false"><button class="btn page-link"
+                (click)="updateDataTable(page.number+1,page.size)">{{page.number+2}}</button></li>
+            <li class="page-item" *ngIf="page.last==false"><button class="btn page-link"
+                (click)="updateDataTable(page.totalPages-1,page.size)"><i class="nb-arrow-right"></i></button></li>
+          </ul>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

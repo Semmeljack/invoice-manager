@@ -1,0 +1,19 @@
+{
+	"title": "Operaciones linea B",
+	"icon": "person-outline",
+	"children": [
+		{
+			"title": "Reportes",
+			"link": "/pages/operaciones/reportes",
+			"queryParams":{"lineaEmisor":"B","status":"*"}
+		},
+		{
+			"title": "CFDI",
+			"link": "/pages/operaciones/cfdi/B/*"
+		},
+		{
+			"title": "Multicomplementos",
+			"link": "/pages/operaciones/multicomplementos"
+		}
+	]
+}

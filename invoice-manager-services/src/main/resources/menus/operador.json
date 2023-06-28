@@ -1,0 +1,44 @@
+{
+	"title": "Operaciones",
+	"icon": "maximize-outline",
+	"children": [
+		{
+			"title": "Clientes",
+			"link": "/pages/operaciones/clientes"
+		},
+		{
+			"title": "Empresas",
+			"link": "/pages/operaciones/empresas",
+			"queryParams":{"linea":"A"}
+		},
+		{
+			"title": "Validacion facturas",
+			"link": "/pages/operaciones/reportes",
+			"queryParams":{"lineaEmisor":"A","status":"1"}
+			
+		},
+		{
+			"title": "Timbrar facturas",
+			"link": "/pages/operaciones/reportes",
+			"queryParams":{"lineaEmisor":"A","status":"4"}
+			
+		},
+		{
+			"title": "Reportes",
+			"link": "/pages/operaciones/reportes",
+			"queryParams":{"lineaEmisor":"A","status":"*"}
+		},
+		{
+	        "title": "Complementos Multipago",
+	        "link": "/pages/operaciones/pago-facturas"
+     	},
+		{
+			"title": "Usuarios",
+			"link": "/pages/operaciones/usuarios"
+		},
+     	{
+			"title": "Pagos",
+			"link": "/pages/operaciones/pagos"
+		}
+	]
+}

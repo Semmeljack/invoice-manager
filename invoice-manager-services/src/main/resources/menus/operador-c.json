@@ -1,0 +1,19 @@
+{
+	"title": "Operaciones linea C",
+	"icon": "layout-outline",
+	"children": [
+		{
+			"title": "Reportes",
+			"link": "/pages/operaciones/reportes",
+			"queryParams":{"lineaEmisor":"C","status":"*"}
+		},
+		{
+			"title": "CFDI",
+			"link": "/pages/operaciones/cfdi/C/*"
+		},
+		{
+			"title": "Multicomplementos",
+			"link": "/pages/operaciones/multicomplementos"
+		}
+	]
+}

@@ -1,0 +1,10 @@
+{
+	"title": "Legal",
+	"icon": "people-outline",
+	"children": [
+		{
+			"title": "Empresas",
+			"link": "/pages/legal/empresas"
+		}
+	]
+}

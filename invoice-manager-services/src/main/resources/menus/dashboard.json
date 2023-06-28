@@ -1,0 +1,6 @@
+{
+	"title": "Dashboard",
+	"icon": "bar-chart-outline",
+	"link": "/pages/dashboard",
+	"home": true
+}

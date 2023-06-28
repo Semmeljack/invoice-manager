@@ -1,0 +1,247 @@
+<div class="row">
+  <div class="col-md-12">
+    <nb-card class="inline-form-card">
+      <nb-card-header>PAGOS</nb-card-header>
+      <nb-card-body>
+        <div class="row slide_1" *ngIf="vista==='validacion-pagos'">
+          <div class="col-md-2">
+            <label for="acredor" class="label">Razon Social Empresa</label>
+            <input id="acredor" class="form-control" fullWidth type="text" placeholder="Nombre empresa"
+              [(ngModel)]="filterParams.acredor" [disabled]='filterParams.deudor.length>0'>
+          </div>
+          <div class="col-md-2">
+            <label for="deudor" class="label">Razon Social Cliente</label>
+            <input id="deudor" class="form-control" fullWidth type="text" placeholder="Nombre cliente"
+              [(ngModel)]="filterParams.deudor" [disabled]='filterParams.acredor.length>0'>
+          </div>
+
+          <div class="col-md-2">
+            <label for="formpicker1" class="label">Desde</label>
+            <input nbInput placeholder="Fecha de pago" [nbDatepicker]="formpicker1" fullWidth style="display:block;"
+              class="form-control" [(ngModel)]="filterParams.since">
+            <nb-datepicker #formpicker1></nb-datepicker>
+          </div>
+          <div class="col-md-2">
+            <label for="formpicker2" class="label">Hasta</label>
+            <input nbInput placeholder="Fecha de pago" [nbDatepicker]="formpicker2" fullWidth style="display:block;"
+              class="form-control" [(ngModel)]="filterParams.to">
+            <nb-datepicker #formpicker2></nb-datepicker>
+          </div>
+          <div class="col-2">
+            <label for="inputBank" class="label">Forma de pago</label>
+            <div class="form-inline">
+              <select id="inputPayType" style="display:block;  width:  100%;" class="form-control"
+                [(ngModel)]="filterParams.formaPago">
+                <option value="*">TODAS</option>
+                <option value="EFECTIVO">Efectivo</option>
+                <option value="CHEQUE">Cheque nominativo</option>
+                <option value="TRANSFERENCIA">Transferencia electrónica de fondos</option>
+                <option value="DEPOSITO">Depósito bancario</option>
+                <option value="CREDITO">Crédito Despacho</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <button style="width: 100%; margin-top: 28px; " type="button" class="btn btn-primary align-bottom"
+              (click)="updateDataTable()" status="primary">BUSCAR</button>
+          </div>
+        </div>
+        <div class="row slide_1" *ngIf="vista==='historial-pagos' || vista === 'pagos'">
+          <div class=" col-md-1">
+            <label for="status" class="label">Estatus</label>
+            <select id="inputPayType" style="display:block;" class="form-control" [(ngModel)]="filterParams.status">
+              <option value="*">Todos</option>
+              <option value="ACEPTADO">Aceptado(pagado)</option>
+              <option value="VALIDACION">En validacion</option>
+              <option value="RECHAZADO">Rechazado</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <label for="acredor" class="label">Razon Social Empresa</label>
+            <input id="acredor" class="form-control" fullWidth type="text" placeholder="Nombre empresa"
+              [(ngModel)]="filterParams.acredor" [disabled]='filterParams.deudor.length>0'>
+          </div>
+          <div class="col-md-2">
+            <label for="deudor" class="label">Razon Social Cliente</label>
+            <input id="deudor" class="form-control" fullWidth type="text" placeholder="Nombre cliente"
+              [(ngModel)]="filterParams.deudor" [disabled]='filterParams.acredor.length>0'>
+          </div>
+
+          <div class="col-md-2">
+            <label for="formpicker1" class="label">Desde</label>
+            <input nbInput placeholder="Fecha de pago" [nbDatepicker]="formpicker1" fullWidth style="display:block;"
+              class="form-control" [(ngModel)]="filterParams.since">
+            <nb-datepicker #formpicker1></nb-datepicker>
+          </div>
+          <div class="col-md-2">
+            <label for="formpicker2" class="label">Hasta</label>
+            <input nbInput placeholder="Fecha de pago" [nbDatepicker]="formpicker2" fullWidth style="display:block;"
+              class="form-control" [(ngModel)]="filterParams.to">
+            <nb-datepicker #formpicker2></nb-datepicker>
+          </div>
+          <div class="col-2">
+            <label for="inputBank" class="label">Forma de pago</label>
+
+            <select id="inputPayType" style="display:block; width:90%;" class="form-control"
+              [(ngModel)]="filterParams.formaPago">
+              <option value="*">TODAS</option>
+              <option value="EFECTIVO">Efectivo</option>
+              <option value="CHEQUE">Cheque nominativo</option>
+              <option value="TRANSFERENCIA">Transferencia electrónica de fondos</option>
+              <option value="DEPOSITO">Depósito bancario</option>
+              <option value="CREDITO">Crédito Despacho</option>
+            </select>
+
+          </div>
+          <div class="col-lg-1">
+            <button style="width: 100%; margin-top: 28px; margin-left: -30px; padding-right: 70px;" type="button"
+              class="btn btn-primary align-bottom" (click)="updateDataTable()" status="primary">BUSCAR</button>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <nb-card>
+      <nb-card-header>Pagos</nb-card-header>
+      <nb-card-body>
+
+        <div *ngIf="page.empty == true" class="alert alert-primary" role="alert">
+          No se encontraron pagos
+        </div>
+        <div class="clearfix" *ngIf="page.empty == false">
+          Resultados
+          <button style="margin-left: 15px;" type="button" (click)="downloadHandler()"
+            class="btn btn-success float-right">Descarga</button>
+
+          <nb-select style="margin-left: 15px;" *ngIf="page.last==false || page.first==true" [selected]="pageSize"
+            (selectedChange)="onChangePageSize($event)" id="inputPageSize" class="float-right">
+            <nb-option value="10">10</nb-option>
+            <nb-option *ngIf="page.number<(page.totalElements/20)" value="20">20</nb-option>
+            <nb-option *ngIf="page.number<(page.totalElements/50)" value="50">50</nb-option>
+          </nb-select>
+        </div>
+
+        <div class="table-responsive slide_1" *ngIf="page.empty == false">
+          <table class="table table-sm">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Acciones</th>
+                <th scope="col" *ngIf="module === 'tesoreria'">Fecha captura</th>
+                <th scope="col" *ngIf="module !== 'tesoreria'">Facturas</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Fecha pago</th>
+                <th scope="col">Monto pagado</th>
+                <th scope="col">Total Factura</th>
+                <th scope="col">Metodo Pago</th>
+                <th scope="col">Forma de pago</th>
+                <th scope="col">Promotor</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Banco</th>
+                <th scope="col">Cuenta</th>
+                <th scope="col">Validador 1</th>
+                <th scope="col">Validador 2</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fila of page.content" [style.background]="cal(fila)">
+                <td scope="row" *ngIf="vista==='validacion-pagos'">
+                  <div class="d-flex flex-row" >
+                    <button class="btn btn-sm ml-1 mr-1" *ngIf="module === 'tesoreria'" 
+                      data-toggle="tooltip" data-placement="top" title="Rechazar pago"
+                      [ngClass]="{'btn-outline-secondary': fila.revision1 && fila.revision2, 'btn-outline-danger': !fila.revision1 || !fila.revision2}"
+                      (click)="openDialog(fila)"><i class="fa fa-times-circle"></i></button>
+                    <button class="btn btn-sm ml-1 mr-1" *ngIf="module === 'tesoreria'"
+                    data-toggle="tooltip" data-placement="top" title="Validacion 1"
+                      [ngClass]="{'btn-outline-secondary': fila.revision1, 'btn-outline-success': !fila.revision1}"
+                      (click)="validar1(fila)" [disabled]="fila.revision1"><i class="fa fa-check-circle"></i></button>
+                    <button class="btn btn-sm ml-1 mr-1" *ngIf="module === 'tesoreria'"
+                    data-toggle="tooltip" data-placement="top" title="Validacion 2"
+                      [ngClass]="{'btn-outline-secondary': !fila.revision1 || fila.revision2, 'btn-outline-success': fila.revision1 && !fila.revision2}"
+                      (click)="validar2(fila)" [disabled]="!fila.revision1 || fila.revision2"><i
+                        class="fa fa-check-circle"></i></button>
+                    <button type="button" (click)="openComprobante(fila.id)" data-toggle="tooltip" data-placement="top" title="Ver comprobante pago"
+                        class="btn btn-sm btn-outline-primary ml-1 mr-1"><i class="fa fa-file"></i></button>
+                  </div>
+                </td>
+                <td scope="row" *ngIf="vista==='historial-pagos' || vista === 'pagos'">
+                  <div class="d-flex flex-row">
+                    <button
+                        type="button"
+                        data-toggle="tooltip" data-placement="top" title="Borrar pago"
+                        class="btn btn-sm mr-1 ml-1"
+                        [ngClass]="{
+                            'btn-outline-secondary':
+                                fila.statusPago == 'ACEPTADO',
+                            'btn-outline-danger':
+                            fila.statusPago != 'ACEPTADO'
+                        }"
+                        [disabled]="fila.statusPago == 'ACEPTADO'"
+                        (click)="deletePayment(fila)"
+                    >
+                        <i class="fa fa-trash"></i>
+                    </button>
+                    <button type="button" (click)="openComprobante(fila.id)"
+                        data-toggle="tooltip" data-placement="top" title="Ver comprobante pago"
+                        class="btn btn-sm btn-outline-primary ml-1 mr-1"><i class="fa fa-file"></i></button>
+                    <button class="btn btn-sm" [disabled]="fila.statusPago === 'RECHAZADO'"
+                      data-toggle="tooltip" data-placement="top" title="Rechazar pago"
+                      [ngClass]="{'btn-outline-secondary': fila.statusPago === 'RECHAZADO', 'btn-outline-danger': fila.statusPago !== 'RECHAZADO' }"
+                      (click)="openDialog(fila)"><i class="fa fa-times-circle"></i></button>
+                  </div>
+                </td>
+                <td scope="row" *ngIf="module === 'tesoreria'">{{fila.fechaCreacion}}</td>
+                <td scope="row" *ngIf="module !== 'tesoreria'" class="d-flex flex-column">
+                  <a *ngFor="let fact of fila.facturas" href="../#/pages/promotor/precfdi/{{fact.folio}}">{{fact.folio}}</a>
+                </td>
+                <td scope="row">{{fila.acredor}}</td>
+                <td scope="row">{{fila.deudor}}</td>
+                <td scope="row" >{{fila.fechaPago.split("T", 1)}}</td>
+                <td scope="row">{{fila.monto | currency}}</td>
+                <td scope="row">
+                  <p *ngFor="let fact of fila.facturas">{{fact.monto | currency}} de {{fact.totalFactura | currency}}</p>
+                </td>
+                <td scope="row">
+                  <p *ngFor="let fact of fila.facturas">{{fact.metodoPago}}</p>
+                </td>
+                <td scope="row">{{fila.formaPago}}</td>
+                <td scope="row">{{fila.solicitante}}</td>
+                <td scope="row">{{fila.statusPago}}</td>
+                <td scope="row">{{fila.banco}}</td>
+                <td scope="row">{{fila.cuenta}}</td>
+                <td scope="row">{{fila.revisor1}}</td>
+                <td scope="row">{{fila.revisor2}}</td>
+
+
+
+              </tr>
+            </tbody>
+          </table>
+
+          <ul class="pagination" *ngIf="page.totalElements > 1">
+            <li class="page-item" *ngIf="page.first==false"><button class="btn page-link"
+                (click)="updateDataTable(0,page.size)"><i class="nb-arrow-left"></i></button></li>
+            <li class="page-item" *ngIf="page.first==false"><button class="btn page-link"
+                (click)="updateDataTable(page.number-1,page.size)">{{page.number}}</button></li>
+            <li class="page-item active"><a class="page-link"><strong>{{page.number+1}}</strong></a></li>
+            <li class="page-item" *ngIf="page.last==false"><button class="btn page-link"
+                (click)="updateDataTable(page.number+1,page.size)">{{page.number+2}}</button></li>
+            <li class="page-item" *ngIf="page.last==false"><button class="btn page-link"
+                (click)="updateDataTable(page.totalPages-1,page.size)"><i class="nb-arrow-right"></i></button></li>
+          </ul>
+        </div>
+
+        <br>
+
+
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

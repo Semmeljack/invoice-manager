@@ -1,0 +1,25 @@
+
+<div class="card mb-9" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant">
+  <div class="card-header">
+    <h5> RECHAZO DE PAGO</h5>
+  </div>
+  <div class="card-body">
+    <div class="form-group">
+      <label for="comments">Agregue una descripcion detallada del motivo del rechazo</label>
+      <textarea type="text" class="form-control" id="comments" placeholder="Comentarios" [(ngModel)]="updatedPayment.comentarioPago" fullWidth  [ngModelOptions]="{standalone: true}"></textarea>
+      <small id="emailHelp" class="form-text text-warning">Una vez  rechazado el pago, este debera ser eliminado y cargado nuevamente</small>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <div class="clearfix">
+      <button class="btn btn-danger ml-2 mr-2 float-right" (click)="onRecahzarPago()" >Rechazar Pago</button>
+      <button class="btn btn-warning ml-2 mr-2 float-right" (click)="cancel()">Salir</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+

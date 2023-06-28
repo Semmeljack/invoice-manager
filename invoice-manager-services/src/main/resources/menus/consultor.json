@@ -1,0 +1,11 @@
+{
+	"title": "Consultas",
+	"icon": "eye-outline",
+	"children": [
+		{
+			"title": "Facturas",
+			"link": "/pages/contabilidad/reportes",
+			"queryParams":{"lineaEmisor":"B","status":"*"}
+		}
+	]
+}

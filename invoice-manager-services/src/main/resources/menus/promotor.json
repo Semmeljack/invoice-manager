@@ -1,0 +1,23 @@
+{
+    "title": "Promotor",
+    "icon": "globe-outline",
+    "children": [
+      {
+        "title": "Clientes",
+        "link": "/pages/promotor/clientes"
+      },
+      {
+        "title": "Reportes",
+        "link": "/pages/promotor/reportes",
+        "queryParams":{"lineaEmisor":"A","status":"*"}
+      },
+      {
+        "title": "Pre-cfdi",
+        "link": "/pages/promotor/precfdi/*"
+      },
+      {
+        "title": "Complementos Multipago",
+        "link": "/pages/promotor/pago-facturas"
+      }
+    ]
+  }

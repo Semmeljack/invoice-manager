@@ -1,0 +1,23 @@
+ {
+	"title": "Tesoreria",
+	"icon": "home-outline",
+	"children": [
+		{
+			"title": "Validacion pagos",
+			"link": "/pages/tesoreria/validacion-pagos"
+		},
+		{
+			"title": "Historico pagos",
+			"link": "/pages/tesoreria/historial-pagos"
+		},
+		{
+			"title": "Empresas",
+			"link": "/pages/tesoreria/empresas"
+		},
+		{
+			"title": "Reportes Facturas",
+			"link": "/pages/tesoreria/reportes",
+			"queryParams":{"lineaEmisor":"A","status":"*"}
+		}
+	]
+}

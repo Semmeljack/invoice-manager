@@ -1,0 +1,23 @@
+{
+	"title": "Contabilidad",
+	"icon": "book-outline",
+	"children": [
+		{
+			"title": "Empresas",
+			"link": "/pages/contabilidad/empresas"
+		},
+		{
+			"title": "Carga Masiva",
+			"link": "/pages/contabilidad/carga-facturas"
+		},
+		{
+			"title": "Reportes",
+			"link": "/pages/contabilidad/reportes",
+			"queryParams":{"lineaEmisor":"B","status":"*"}
+		},
+		{
+			"title": "CFDI",
+			"link": "/pages/contabilidad/cfdi/*"
+		}
+	]
+}

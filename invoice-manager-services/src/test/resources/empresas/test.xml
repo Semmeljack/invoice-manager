@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante LugarExpedicion="03700" MetodoPago="PUE" Exportacion="01" TipoDeComprobante="I" Total="58000.00"
+                  TipoCambio="1" Moneda="MXN" SubTotal="50000.00" FormaPago="03" Fecha="2023-03-09T12:43:33"
+                  Folio="20237600306220907" Version="4.0" xmlns:nomina12="http://www.sat.gob.mx/nomina12"
+                  xmlns:pago20="http://www.sat.gob.mx/Pagos20"
+                  xmlns:ns5="http://www.sat.gob.mx/esquemas/retencionpago/2"
+                  xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  Certificado="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"
+                  NoCertificado="00001000000514535900"
+                  Sello="d9bEmhg+Li+uLn63solCmKo5fNT73XzRdRNUzhBvMNj3ecPQapSoeETbzbUbeXVRSB7Js+K4fkGZbiDr6z6L/+8lqf+Ofw718j7laVe1Ctle9xl+QrKVj7lDNySYYnv/JXdndxGb6YIh1oFibp2PAN+EnQ7O7a0wGQAoDC0pVP65IfVDonALLiXedCnpZhFReYVGCYjlIotYG6GexzCi4OOWTsAxprhrh1ak/xDfkK+kjkWtwz7hV/nvER/1j+FZ/UVlea3vKZVqWvQddz5L463O/fOWDzhObH7xXv5FeOdaknQs6ikoAS/0Gkkia1Kp0/ieWzAn9XQOUsptrwmGpg==">
+    <cfdi:Emisor RegimenFiscal="626" Nombre="AXKAN PUBLICIDAD" Rfc="APU140519728"/>
+    <cfdi:Receptor UsoCFDI="G03" RegimenFiscalReceptor="601" DomicilioFiscalReceptor="01020" Nombre="MOTIN TEATRO"
+                   Rfc="MTE1204037F4"/>
+    <cfdi:Conceptos>
+        <cfdi:Concepto ObjetoImp="02" Descuento="0" Importe="50000" ValorUnitario="50000"
+                       Descripcion="Casting para Proyecto Fuera del Lugar" Unidad="Unidad de Servicio" ClaveUnidad="E48"
+                       Cantidad="1" ClaveProdServ="80141903">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Importe="8000.00" TasaOCuota="0.16" TipoFactor="Tasa" Impuesto="002"
+                                   Base="50000.00"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="8000.00" TotalImpuestosRetenidos="0.00">
+        <cfdi:Traslados>
+            <cfdi:Traslado Importe="8000.00" TasaOCuota="0.16" TipoFactor="Tasa" Impuesto="002" Base="50000.00"/>
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+    <cfdi:Complemento>
+        <tfd:TimbreFiscalDigital xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                 xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"
+                                 Version="1.1" UUID="58CB6BA9-BFB6-4760-BFF0-A36C1519E969"
+                                 FechaTimbrado="2023-03-09T12:43:34" RfcProvCertif="NLC091211KC6"
+                                 SelloCFD="d9bEmhg+Li+uLn63solCmKo5fNT73XzRdRNUzhBvMNj3ecPQapSoeETbzbUbeXVRSB7Js+K4fkGZbiDr6z6L/+8lqf+Ofw718j7laVe1Ctle9xl+QrKVj7lDNySYYnv/JXdndxGb6YIh1oFibp2PAN+EnQ7O7a0wGQAoDC0pVP65IfVDonALLiXedCnpZhFReYVGCYjlIotYG6GexzCi4OOWTsAxprhrh1ak/xDfkK+kjkWtwz7hV/nvER/1j+FZ/UVlea3vKZVqWvQddz5L463O/fOWDzhObH7xXv5FeOdaknQs6ikoAS/0Gkkia1Kp0/ieWzAn9XQOUsptrwmGpg=="
+                                 NoCertificadoSAT="00001000000504447535"
+                                 SelloSAT="aL2rsus0PNdv5M6OJZSynvaiP+ZOaxoMOav+2xFysvsGh+0Q28YsWVWwveSQXhBXO+pGp8vSegpHHZc2b/NINH1uqm/MR1ei+yb3C5weyH9qcs9gBpDl6tqDUGdGVBNgEYHpkfCK7tvRv1ysrsXIzy2kdOnSdMW9lq+SubkMbsh3aO3dqgPrbJ+3z/55EmENTME0tUNnI3bjma1w+wU6He6yKLFm6VODuC5nUFKawmhJpPm4GuLSA4vyoH46vxHMKTkJeo/i2u/p4GHy6dqEajMrkOftmW+dtu7drnvJSoP0KyBVACXN+y1wWvccoRCQayhtwvL1Kb+2O26FP073jw=="
+                                 xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"/>
+    </cfdi:Complemento>
+</cfdi:Comprobante>
